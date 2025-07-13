@@ -9,6 +9,7 @@ import torch.nn as nn
 from torch.nn.init import constant_, xavier_uniform_
 
 from ultralytics.utils.tal import TORCH_1_10, dist2bbox, dist2rbox, make_anchors
+from ultralytics.utils import LOGGER
 
 from .block import DFL, BNContrastiveHead, ContrastiveHead, Proto
 from .conv import Conv, DWConv
