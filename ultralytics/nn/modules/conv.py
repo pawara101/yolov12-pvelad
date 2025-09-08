@@ -6,6 +6,7 @@ import math
 import numpy as np
 import torch
 import torch.nn as nn
+from kan import KANConvNDLayer
 
 __all__ = (
     "Conv",
@@ -16,6 +17,7 @@ __all__ = (
     "ConvTranspose",
     "Focus",
     "GhostConv",
+    "KANConv2DLayer",
     "ChannelAttention",
     "SpatialAttention",
     "CBAM",
@@ -274,6 +276,17 @@ class RepConv(nn.Module):
         if hasattr(self, "id_tensor"):
             self.__delattr__("id_tensor")
 
+class KANConv2DLayer(KANConvNDLayer):
+    def __init__(self, input_dim, output_dim, kernel_size, spline_order=3, groups=1, padding=0, stride=1, dilation=1,
+                 grid_size=5, base_activation=nn.GELU, grid_range=[-1, 1], dropout=0.0, norm_layer=nn.InstanceNorm2d,
+                 **norm_kwargs):
+        super(KANConv2DLayer, self).__init__(nn.Conv2d, norm_layer,
+                                             input_dim, output_dim,
+                                             spline_order, kernel_size,
+                                             groups=groups, padding=padding, stride=stride, dilation=dilation,
+                                             ndim=2,
+                                             grid_size=grid_size, base_activation=base_activation,
+                                             grid_range=grid_range, dropout=dropout, **norm_kwargs)
 
 class ChannelAttention(nn.Module):
     """Channel-attention module https://github.com/open-mmlab/mmdetection/tree/v3.0.0rc1/configs/rtmdet."""
