@@ -354,7 +354,7 @@ class Index(nn.Module):
         return x[self.index]
 
 
-## 
+## KAN Conv layers
 class KANConvNDLayer(nn.Module):
     def __init__(self, conv_class, norm_class, input_dim, output_dim, spline_order, kernel_size,
                  groups=1, padding=0, stride=1, dilation=1,
