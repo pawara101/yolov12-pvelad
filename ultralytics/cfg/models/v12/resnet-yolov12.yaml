@@ -21,6 +21,5 @@ backbone:
   - [-1, 1, ResNetLayer, [1024, 512, 2, False, 3]] # 4-P5/32
 
 
-# YOLO12-turbo head
 head:
   - [[2, 3, 4], 1, Detect, [nc]] # Detect(P3, P4, P5)

@@ -65,6 +65,10 @@ from ultralytics.nn.modules import (
     WorldDetect,
     v10Detect,
     A2C2f,
+    KANConvNDLayer,
+    KANConv3DLayer,
+    KANConv2DLayer,
+    KANConv1DLayer,
 )
 from ultralytics.utils import DEFAULT_CFG_DICT, DEFAULT_CFG_KEYS, LOGGER, colorstr, emojis, yaml_load
 from ultralytics.utils.checks import check_requirements, check_suffix, check_yaml
@@ -302,7 +306,6 @@ class DetectionModel(BaseModel):
     def __init__(self, cfg="yolov8n.yaml", ch=3, nc=None, verbose=True):  # model, input channels, number of classes
         """Initialize the YOLOv8 detection model with the given config and parameters."""
         super().__init__()
-        LOGGER.info(f"===== CFG :{cfg}")
         self.yaml = cfg if isinstance(cfg, dict) else yaml_model_load(cfg)  # cfg dict
         if self.yaml["backbone"][0][2] == "Silence":
             LOGGER.warning(
@@ -313,7 +316,6 @@ class DetectionModel(BaseModel):
 
         # Define model
         ch = self.yaml["ch"] = self.yaml.get("ch", ch)  # input channels
-        LOGGER.info(f'Number of channels {ch}')
         if nc and nc != self.yaml["nc"]:
             LOGGER.info(f"Overriding model.yaml nc={self.yaml['nc']} with nc={nc}")
             self.yaml["nc"] = nc  # override YAML value
@@ -324,14 +326,12 @@ class DetectionModel(BaseModel):
 
         # Build strides
         m = self.model[-1]  # Detect()
-        #LOGGER.info(f'm : {m}')
         if isinstance(m, Detect):  # includes all Detect subclasses like Segment, Pose, OBB, WorldDetect
             s = 256  # 2x min stride
             m.inplace = self.inplace
 
             def _forward(x):
                 """Performs a forward pass through the model, handling different Detect subclass types accordingly."""
-                LOGGER.info(f'========= X shape : {x.shape}')
                 if self.end2end:
                     return self.forward(x)["one2many"]
                 return self.forward(x)[0] if isinstance(m, (Segment, Pose, OBB)) else self.forward(x)
