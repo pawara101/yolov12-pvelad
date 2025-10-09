@@ -378,14 +378,14 @@ class KANConvNDLayer(nn.Module):
         self.norm_kwargs = norm_kwargs
 
         ### Debugging
-        LOGGER.info('Input dim :',input_dim)
-        LOGGER.info('Output dim :',output_dim)
+        LOGGER.info('Input dim :',self.inputdim)
+        LOGGER.info('Output dim :',self.output_dim)
         LOGGER.info('Spline order :',spline_order)
         LOGGER.info('Kernel size :',kernel_size)
         LOGGER.info('Padding :',padding)
         LOGGER.info('Stride :',stride)
         LOGGER.info('Dilation :',dilation)
-        LOGGER.info('Groups :',groups)
+        LOGGER.info('Groups :',self.groups)
         LOGGER.info('NDIM :',ndim)
         LOGGER.info('Grid size :',grid_size)
         LOGGER.info('Grid range :',grid_range)
