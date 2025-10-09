@@ -7,6 +7,8 @@ import numpy as np
 import torch
 import torch.nn as nn
 
+from ultralytics.utils import LOGGER
+
 __all__ = (
     "Conv",
     "Conv2",
@@ -376,18 +378,18 @@ class KANConvNDLayer(nn.Module):
         self.norm_kwargs = norm_kwargs
 
         ### Debugging
-        print('Input dim :',input_dim)
-        print('Output dim :',output_dim)
-        print('Spline order :',spline_order)
-        print('Kernel size :',kernel_size)
-        print('Padding :',padding)
-        print('Stride :',stride)
-        print('Dilation :',dilation)
-        print('Groups :',groups)
-        print('NDIM :',ndim)
-        print('Grid size :',grid_size)
-        print('Grid range :',grid_range)
-        print('Norm kwargs :',norm_kwargs)
+        LOGGER.info('Input dim :',input_dim)
+        LOGGER.info('Output dim :',output_dim)
+        LOGGER.info('Spline order :',spline_order)
+        LOGGER.info('Kernel size :',kernel_size)
+        LOGGER.info('Padding :',padding)
+        LOGGER.info('Stride :',stride)
+        LOGGER.info('Dilation :',dilation)
+        LOGGER.info('Groups :',groups)
+        LOGGER.info('NDIM :',ndim)
+        LOGGER.info('Grid size :',grid_size)
+        LOGGER.info('Grid range :',grid_range)
+        LOGGER.info('Norm kwargs :',norm_kwargs)
 
         self.dropout = None
         if dropout > 0:
