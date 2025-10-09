@@ -165,5 +165,9 @@ __all__ = (
     "PSA",
     "TorchVision",
     "Index",
-    "A2C2f"
+    "A2C2f",
+    "KANConvNDLayer",
+    "KANConv3DLayer",
+    "KANConv2DLayer",
+    "KANConv1DLayer",
 )
