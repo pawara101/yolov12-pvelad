@@ -375,6 +375,20 @@ class KANConvNDLayer(nn.Module):
         self.grid_range = grid_range
         self.norm_kwargs = norm_kwargs
 
+        ### Debugging
+        print('Input dim :',input_dim)
+        print('Output dim :',output_dim)
+        print('Spline order :',spline_order)
+        print('Kernel size :',kernel_size)
+        print('Padding :',padding)
+        print('Stride :',stride)
+        print('Dilation :',dilation)
+        print('Groups :',groups)
+        print('NDIM :',ndim)
+        print('Grid size :',grid_size)
+        print('Grid range :',grid_range)
+        print('Norm kwargs :',norm_kwargs)
+
         self.dropout = None
         if dropout > 0:
             if ndim == 1:
