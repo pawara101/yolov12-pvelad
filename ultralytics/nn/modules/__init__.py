@@ -62,6 +62,7 @@ from .block import (
     KANConv3DLayer,
     KANConv2DLayer,
     KANConv1DLayer,
+    CustomBlock,
 )
 from .conv import (
     CBAM,

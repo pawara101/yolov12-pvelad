@@ -1534,3 +1534,14 @@ class KANConv1DLayer(KANConvNDLayer):
                                              ndim=1,
                                              grid_size=grid_size, base_activation=base_activation,
                                              grid_range=grid_range, dropout=dropout, **norm_kwargs)
+
+## Test Block
+class CustomBlock(nn.Module) :
+    """Custom block with Conv-BatchNorm-ReLU sequence."""
+    def __init__(self, c1, c2) :
+        """Initialize CustomBlock with input and output channels."""
+        super() .__init__()
+        self.layers = nn.Sequential(nn.Conv2d(c1, c2, 3, 1, 1) , nn.BatchNorm2d(c2) , nn.ReLU() )
+    def forward(self, x) :
+        """Forward pass through the block."""
+        return self.layers(x)

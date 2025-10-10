@@ -69,6 +69,7 @@ from ultralytics.nn.modules import (
     KANConv3DLayer,
     KANConv2DLayer,
     KANConv1DLayer,
+    CustomBlock,
 )
 from ultralytics.utils import DEFAULT_CFG_DICT, DEFAULT_CFG_KEYS, LOGGER, colorstr, emojis, yaml_load
 from ultralytics.utils.checks import check_requirements, check_suffix, check_yaml
@@ -1070,6 +1071,9 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             c2 = ch[f[-1]]
         elif m in {KANConvNDLayer, KANConv3DLayer, KANConv2DLayer, KANConv1DLayer}:
             args = [ch[f]]
+        elif m is CustomBlock:
+            c1, c2 = ch[f], args[0]  # input channels, output channels
+            args = [c1, c2, *args[1:]]
         else:
             c2 = ch[f]
 
