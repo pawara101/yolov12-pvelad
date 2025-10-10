@@ -58,6 +58,10 @@ from .block import (
     SCDown,
     TorchVision,
     A2C2f,
+    KANConvNDLayer,
+    KANConv3DLayer,
+    KANConv2DLayer,
+    KANConv1DLayer,
 )
 from .conv import (
     CBAM,
@@ -74,10 +78,6 @@ from .conv import (
     LightConv,
     RepConv,
     SpatialAttention,
-    KANConvNDLayer,
-    KANConv3DLayer,
-    KANConv2DLayer,
-    KANConv1DLayer,
 )
 from .head import OBB, Classify, Detect, Pose, RTDETRDecoder, Segment, WorldDetect, v10Detect
 from .transformer import (
